@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercise One</title>
+    <style media="screen">
+      [v-cloak]{
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- EXERCISE 1: Add a computed property which returns an array of strings
+      with the movie name followed by the release year in parenthesis.
+      Then output these strings as an ordered list. -->
+      <ol>
+        <li v-cloak v-for="movie in movieInfo">{{ movie }}</li>
+      </ol>
+
+      <!-- EXERCISE 2: Make the button below add a movie of your choice to the
+      "movies" data property. Then add a watcher which outputs the movie that
+      was just added in an alert dialog. -->
+      <button v-on:click="addMovie">Add Movie</button>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+      new Vue({
+      	el: '#app',
+        data: {
+        	movies: [
+          	{ name: 'The Matrix', year: 1999 },
+            { name: 'The Matrix Reloaded', year: 2003 },
+            { name: 'The Matrix Revolutions', year: 2003 }
+          ]
+        },
+        methods: {
+          addMovie: function(){
+            this.movies.push({
+              name: 'The Fast and The Furious',
+              year: 2001
+            });
+          }
+        },
+        watch: {
+          movies: function(movies){
+            let newMovie = movies[movies.length -1];
+            alert(`${newMovie.name} from ${newMovie.year} was just added.`)
+          }
+        },
+        computed: {
+          movieInfo: function(){
+            return this.movies.map(function(movie){
+              return movie.name + ' ' + '(' + movie.year+')'
+            });
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

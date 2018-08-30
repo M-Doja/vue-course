@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercise One</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- EXERCISE 1: Use two-way data binding to update the value of a "password"
+      data property. -->
+      <input type="password" v-model="password" placeholder="Enter your name">
+
+      <!-- EXERCISE 2: Show the correct paragraph depending on the length of
+      the entered password. -->
+      <p v-if='password.length > 8'>Awesome! Your password is longer than 8 characters.</p>
+      <p v-else-if='password.length > 0'>Please enter a longer password.</p>
+      <p v-else>Please enter a password.</p>
+
+      <!-- EXERCISE 3: Display the categories as an ordered list with each
+      category's sub-categories as a nested unordered list. -->
+      <ol>
+        <li v-for="v in categories"> {{ v.name }}
+          <ul>
+            <li v-for="s in v.sub">: {{ s }}</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+      new Vue({
+      	el: '#app',
+        data: {
+        	password: '',
+          categories: [
+          	{ name: 'JavaScript', sub: ['Vue.js', 'React', 'Angular2'] },
+            { name: 'Databases', sub: ['MySQL', 'PostgreSQL', 'MariaDB'] },
+            { name: 'Operating Systems', sub: ['macOS', 'Linux', 'Windows'] }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>

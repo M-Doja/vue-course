@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercise One</title>
+    <style media="screen">
+    .shape {
+      width: 150px;
+      height: 150px;
+      background-color: blue;
+    }
+
+    .highlighted {
+      background-color: #DECA9B;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- EXERCISE 1: Bind the "shapeStyles" data property to the "style" attribute.
+      When clicking the below shape, change the shape from round to squared or
+      vice versa.
+      HINT: Use Vue.set to manipulate the data property. Use the "border-radius"
+      CSS property for round corners. -->
+      <div class="shape" v-bind:style="shapeStyles" v-on:click="changeShape"></div>
+
+      <!-- EXERCISE 2: Apply the "highlighted" class to every second row in the below
+      table. HINT: Use the modulus operator together with the v-for loop index. -->
+      <h1>Employees</h1>
+
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Company</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(employee, index) in employees" v-bind:class="{highlighted: index % 2}">
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.title }}</td>
+            <td>{{ companyName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+    new Vue({
+    	el: '#app',
+      data: {
+      	shapeStyles: {},
+        employees: [
+        	{ name: 'Abby', title: 'Accountant' },
+          { name: 'Andy', title: 'Marketing Manager' },
+          { name: 'Brandon', title: 'Vue.js Expert' },
+          { name: 'Bob', title: 'Key Account Manager' }
+        ],
+        companyName: 'VueX Ltd.'
+      },
+      methods:{
+        changeShape: function(){
+          if (typeof this.shapeStyles['border-radius'] !== 'undefined'){
+            Vue.set(this.shapeStyles, 'border-radius', undefined);
+          } else {
+            Vue.set(this.shapeStyles, 'border-radius', '50%');
+          }
+        }
+      },
+    });
+    </script>
+  </body>
+</html>
